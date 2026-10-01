@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RegRelay</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;font:15px Arial;background:#f4f6fa;color:#172033}
+    header{background:#172554;color:white;padding:20px 8%} main{max-width:950px;margin:25px auto;padding:0 18px}
+    .card{background:white;padding:20px;margin-bottom:16px;border-radius:12px;box-shadow:0 3px 12px #0001}
+    .tag{background:#fef3c7;color:#92400e;padding:5px 9px;border-radius:15px;font-size:12px}
+    button{background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:7px;cursor:pointer}
+    table{width:100%;border-collapse:collapse} th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}
+    tr:hover{background:#f8fafc;cursor:pointer}.high{color:#b91c1c;font-weight:bold}.medium{color:#b45309;font-weight:bold}
+    .evidence{display:grid;grid-template-columns:1fr 1fr;gap:15px} blockquote{margin:0;padding:14px;background:#f8fafc;border-left:4px solid #2563eb}
+    @media(max-width:600px){.evidence{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header><h2>RegRelay</h2><div>Regulatory Change Impact Dashboard</div></header>
+  <main>
+    <section class="card">
+      <span class="tag">Preparation mode · Targeted for end-2027</span>
+      <h2>Workplace Fairness Act</h2><p>Scan LionCity Retail's policies and systems for impact.</p>
+      <button onclick="results.hidden=false">Analyse impact</button>
+    </section>
+    <section class="card" id="results" hidden>
+      <h3>Impact findings</h3>
+      <table><tr><th>Material</th><th>Finding</th><th>Confidence</th></tr>
+        <tr onclick="show('age')"><td>Recruitment Rules</td><td>Automatic age filter</td><td class="high">High</td></tr>
+        <tr onclick="show('grievance')"><td>Grievance Policy</td><td>No confidential channel</td><td class="high">High</td></tr>
+        <tr onclick="show('culture')"><td>Interview Scorecard</td><td>Subjective culture-fit test</td><td class="medium">Medium</td></tr>
+      </table>
+    </section>
+    <section class="card" id="detail" hidden>
+      <h3 id="title"></h3><div class="evidence">
+        <div><h4>Legal requirement</h4><blockquote id="law"></blockquote></div>
+        <div><h4>Company material</h4><blockquote id="company"></blockquote></div>
+      </div><p id="note"></p><button>Generate lawyer handoff</button>
+    </section>
+  </main>
+  <script>
+    const data={
+      age:['Automatic age filter','Employment decisions must not be based on age.','Reject applicants above 55 years old.','Likely conflict. Suspend the rule and request legal review.'],
+      grievance:['Missing confidential channel','Employers must establish an appropriate grievance process.','All complaints go to the employee’s direct manager.','The process may not protect confidentiality.'],
+      culture:['Subjective culture-fit test','Employment decisions should be merit-based.','Score candidates 1–5 for culture fit.','More context is needed. Escalate for review.']};
+    function show(id){const f=data[id];title.textContent=f[0];law.textContent=f[1];company.textContent=f[2];note.textContent=f[3];detail.hidden=false;detail.scrollIntoView({behavior:'smooth'})}
+  </script>
+</body></html>
